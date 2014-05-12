@@ -69,3 +69,17 @@ Current patch list:
     ArdCore and the A2 knob/CV controls the sustain amount
     while the A4 knob/CV controls the envelope gate.
 
+- ssbLogic
+    Two simple logic gates. A0 and A1 allow the user to select between OR,
+    AND, NOR, NAND, XOR and NXOR. A2 and A3 are used as inputs. If the value
+    of A2 or A3 is less than half, it is FALSE, if equal or greater than 
+    half, it is TRUE. The two values are compared with the selected logic
+    types. DO outputs the logic type set by A0 and D1 outputs the logic 
+    type set by A1. The DAC out outputs the sum of A2 and A3 (constrained
+    between 0v and 5v).
+
+- ssb4thsAnd5ths
+    A simple quantized pitch shifter. The patch shfits the input on A2 either
+    up or down (as set by A0) a 4th or a 5th (as set by A1). The note output
+    is constrained to 0-5volts (C3 to C7). Notes outside these values can not 
+    be produced by the ArdCore.
