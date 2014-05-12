@@ -5,8 +5,8 @@ Description:
     Input can be scaled with the A2 and A3 knobs. The analog out is the summed value (capped at min/max values).
     Digital Gate out is a logic gate. The type of output is set by the value of A0 (Digital 0) and A1 (Digital 1).
     The following logic types are supported on either D0 or D1; OR, AND, NOR, NAND, XOR, NXOR
-            A0:   0    1    0    1
-            A1:   0    0    1    1
+            A2:   0    1    0    1
+            A3:   0    0    1    1
             ------------------------------
             OR:   0    1    1    1
             AND:  0    0    0    1
@@ -117,14 +117,12 @@ void loop()
 {
     // Get the state of the first two controls. These set the 
     // desired types of logic for each Digital Out.
-    int aZeroRaw = analogRead(0);
-    int aOneRaw = analogRead(1);
-    int aZeroType = LogicType(aZeroRaw);
-    int aOneType = LogicType(aOneRaw);
+    int aZeroType = LogicType(analogRead(0));
+    int aOneType = LogicType(analogRead(1));
 
     // Get the values for eadh analog inputs to test
-    int aTwoInitState = analogRead(2);
-    int aThrInitState = analogRead(3);
+    boolean aTwoInitState = boolState(analogRead(2));
+    boolean aThrInitState = boolState(analogRead(3));
 
     // Get the logic state for each output based on the type
     // and the two init values.
@@ -178,10 +176,8 @@ int LogicType(int input)
     return output;
 }
 
-boolean doLogicState(int logicType, int initValA, int initValB)
+boolean doLogicState(int logicType, int boolA, int boolB)
 {
-    boolean boolA = boolState(initValA);
-    boolean boolB = boolState(initValB);
     boolean output = FALSE;
     switch (logicType)
     {
