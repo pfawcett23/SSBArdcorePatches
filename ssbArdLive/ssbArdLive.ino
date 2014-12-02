@@ -108,7 +108,7 @@ void loop()
         else if(c == ']')
         {
             liveInput = convertStringToInt(sample);
-            showSample(liveInput); // Debug, uncomment if needed.
+            // showSample(liveInput);              // Debug, uncomment if needed.
         }
         else
         {
@@ -116,8 +116,8 @@ void loop()
         }
     }
     sigOut = scaleSig(liveInput, analogRead(0));
-    // showSample(sigOut);            // Debug, uncomment if needed.
-    // showADials();          // Debug, uncomment if needed.
+    // showSample(sigOut);                         // Debug, uncomment if needed.
+    // showADials();                               // Debug, uncomment if needed.
     dacOutput((sigOut >> 2));
 }
 
@@ -152,7 +152,7 @@ void dacOutput(long v)
 }
 
 //  =================== debug routines =========================
-
+/*
 void showSample(int var)
 {
     Serial.print("Sample => ");
@@ -189,4 +189,4 @@ void showADials(void)
     Serial.println(analogRead(5));
     Serial.println("");
 }
-
+*/

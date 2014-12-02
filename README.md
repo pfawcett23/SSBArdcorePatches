@@ -83,3 +83,12 @@ Current patch list:
     up or down (as set by A0) a 4th or a 5th (as set by A1). The note output
     is constrained to 0-5volts (C3 to C7). Notes outside these values can not 
     be produced by the ArdCore.
+
+- ssbArdSeqOne
+    A step sequencer that uses the expander as well as the ardcore. It plays 
+    a sequence of semitone offsets from a root note (set by A0 and A1).
+    Each Step has two independant gates (D0 and D1). The gate widths may be
+    set and the gates may be expanded or stuttered with use of the expander.
+    See the comments in the patch / read me in the patch directory for more
+    details.
+

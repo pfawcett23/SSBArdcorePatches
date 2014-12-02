@@ -109,14 +109,17 @@ void loop()
         char c = (char)Serial.read();
         if(c == '[')
         {
+            // Initialize the input string at the start
             sample = "";
         }
         else if(c == ']')
         {
+            // Convert input string to signal
             sigOut = convertStringToInt(sample);
         }
         else
         {
+            // add the next char to the string.
             sample += c;
         }
     }
