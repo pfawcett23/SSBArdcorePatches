@@ -1,0 +1,17 @@
+###############################################################################
+# Methods and Functions (KEWORD2)
+###############################################################################
+
+ssbGate         KEYWORD2
+~ssbGate        KEYWORD2
+isActive        KEYWORD2
+isOn            KEYWORD2
+updateGate      KEYWORD2
+updateState     KEYWORD2
+unsetGate       KEYWORD2
+render          KEYWORD2
+
+###############################################################################
+# Constants (LITERAL1)
+###############################################################################
+

@@ -1,0 +1,19 @@
+###############################################################################
+# Methods and Functions (KEWORD2)
+###############################################################################
+
+enableSerial    KEYWORD2
+debugState      KEYWORD2
+debugCtl        KEYWORD2
+getFreeMem      KEYWORD2
+resetTickCount  KEYWORD2
+setMaxTicks     KEYWORD2
+updateTicks     KEYWORD2
+debugValue      KEYWORD2
+getTickCount    KEYWORD2
+getMaxTicks     KEYWORD2
+
+###############################################################################
+# Constants (LITERAL1)
+###############################################################################
+

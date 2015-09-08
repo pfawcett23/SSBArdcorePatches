@@ -1,0 +1,30 @@
+###############################################################################
+# Methods and Functions (KEWORD2)
+###############################################################################
+
+dacOutput KEYWORD2
+expanderGatesOut KEYWORD2
+setClockInterrupt KEYWORD2
+peekClockState KEYWORD2
+readClockState KEYWORD2
+isr KEYWORD2
+getCtlHighLow KEYWORD2
+getCtlIndex KEYWORD2
+
+###############################################################################
+# Constants (LITERAL1)
+###############################################################################
+
+MAX_VAL LITERAL1
+MIN_VAL LITERAL1
+A0_INPUT LITERAL1
+A1_INPUT LITERAL1
+A2_INPUT LITERAL1
+A3_INPUT LITERAL1
+A4_INPUT LITERAL1
+A5_INPUT LITERAL1
+CLOCK_IN LITERAL1
+DIG_PINS[2] LITERAL1
+PIN_OFFSET LITERAL1
+NOTE_COUNT LITERAL1
+QNOTES LITERAL1
