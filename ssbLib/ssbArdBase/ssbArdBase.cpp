@@ -198,8 +198,7 @@ int getCtlIndex(int pin, int max_index)
 }
 
 /* getCtlIndex
-- treat an Analog Input as a True / False input.
-Greater than (or equal) 50% return true otherwise return false.
+- map Analog Input to min - max value range.
 */
 int getCtlIndex(int pin, int min_index, int max_index)
 {

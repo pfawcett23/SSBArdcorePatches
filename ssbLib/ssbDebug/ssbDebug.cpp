@@ -185,9 +185,14 @@ void ssbDebug::setFrequency(unsigned int frequency)
 
 void ssbDebug::updateTicks()
 {
-    //debugValue("Update Ticks Start: Last Out :  ", (int)_last_out);
-    //debugValue("Update Ticks Start: Frequency:  ", (int)_frequency);
-    //debugValue("Update Ticks Start: Current MS: ", (long)millis());
+    //Serial.print("updateTicks::Do Print => ");
+    //Serial.println(_do_print);
+    //Serial.print("updateTicks::Last Out => ");
+    //Serial.println(_last_out);
+    //Serial.print("updateTicks::Frequency => ");
+    //Serial.println(_frequency);
+    //Serial.print("updateTicks::Current MS: => ");
+    //Serial.println(millis());
     if (_do_print == false)
     {
         if (_ms_freq == true)
@@ -438,5 +443,7 @@ void ssbDebug::debugOutput(int outSignal, boolean d0Out, boolean d1Out)
 
 bool ssbDebug::_output_time()
 {
+    //Serial.print("Output_Time::Do Print => ");
+    //Serial.println(_do_print);
     return _do_print;
 }

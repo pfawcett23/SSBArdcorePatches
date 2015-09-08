@@ -100,6 +100,6 @@ class ssbDebug
         void debugOutput(int dac_out, boolean d0_out, boolean d1_out);
     private:
         bool _output_time();
-}
+};
 
 #endif // _ssb_debug_class_
