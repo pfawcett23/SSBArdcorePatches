@@ -84,6 +84,20 @@ Current patch list:
     is constrained to 0-5volts (C3 to C7). Notes outside these values can not 
     be produced by the ArdCore.
 
+- ssb4thsAnd5thsGate
+    A simple quantized pitch shifter. The patch shfits the input on A2 either
+    up or down (as set by A0) a 4th or a 5th (as set by A1). The note output
+    is constrained to 0-5volts (C3 to C7). Notes outside these values can not 
+    be produced by the ArdCore. Different gates trigger outputs may be set for
+    the D0 and D1 outputs.
+
+- ssb4thsAnd5thsGateEX
+    A simple quantized pitch shifter. The patch shfits the input on A2 either
+    up or down (as set by A0) a 4th or a 5th (as set by A1). The note output
+    is constrained to 0-5volts (C3 to C7). Notes outside these values can not 
+    be produced by the ArdCore. Different gates trigger outputs may be set for
+    the D0 and D1 outputs. The gate width may be varied with the expander.
+
 - ssbArdSeqOne
     A step sequencer that uses the expander as well as the ardcore. It plays 
     a sequence of semitone offsets from a root note (set by A0 and A1).
@@ -92,3 +106,16 @@ Current patch list:
     See the comments in the patch / read me in the patch directory for more
     details.
 
+- ssbSkipper
+    Input Clock or Gate Signals on the clock input.
+    Depending upon the state of A2/A3, Either output the same gate signal on
+    D0/D1 or skip it. At the lowest setting it plays all gates. At higher
+    settings it will skip every other, third, fourth, fifth, sixth or seventh.
+    At the highest setting it will skip all. If A0/A1 is high (>50%) the skip
+    will be random, ie it may or may not occur, (50% chance). The expander 
+    A4/A5 may be used to shift the randomness from 50% chance to weigighted 
+    either toward 10% or 90% (low or high).
+    The skip none and skip all settings are best with random as they you get
+    a 50% don't play or a 50% do play for all gates. With the expander this 
+    can then be maniuplated further. Note that the skip and the random 
+    percents may be modulated.
