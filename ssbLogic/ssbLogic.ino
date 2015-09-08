@@ -36,6 +36,8 @@ Description:
 
     Created:  May 11 2014 by Peter Fawcett (SoundSweepsBy).
         Version 1 - Original patch developement.
+        Version 2 - Jan 24. 2015
+                    Update to use ssbArdBase lib. Code tightened up.
 
     ============================================================
 
@@ -52,31 +54,23 @@ Description:
     For more information on the Creative Commons CC BY-NC license,
     visit http://creativecommons.org/licenses/
 */
-// Max output.
-const int     MAX_VAL      = 1023;
-const int     MIN_VAL      = 0;
-const boolean FALSE        = LOW;
-const boolean TRUE         = HIGH;
-const int     HALFWAY      = MAX_VAL / 2;
-const int     STAGE_SEP    = MAX_VAL / 6;
 
+#include "ssbArdBase.h"
+                                
+const   int     OR              = 0;
+const   int     AND             = 1;
+const   int     NOR             = 2;
+const   int     NAND            = 3;
+const   int     XOR             = 4;
+const   int     NXOR            = 5;
 
-//  constants related to the Arduino Nano pin use
-const int     pinOffset    = 5;       // DAC     -> the first DAC pin (from 5-12)
-const int     digPin[2]    = {3, 4};  // the digital output pins
-     
-const int     OR           = 0;
-const int     AND          = 1;
-const int     NOR          = 2;
-const int     NAND         = 3;
-const int     XOR          = 4;
-const int     NXOR         = 5;
+int             logic_types[2]  = {0, 0};
+int             input_values[2] = {0, 0};
+bool            logic_states[2] = {false, false};
+bool            gate_states[2]  = {false, false};
+int             logic_ctls[2]   = {A0_INPUT, A1_INPUT};
+int             input_ctls[2]   = {A2_INPUT, A3_INPUT};
 
-/* Debugging
-boolean       debug        = TRUE;
-int           tick         = 0;
-int           tickOutCount = 6000;
- */
 
 //  ==================== setup() START ======================
 //
@@ -85,24 +79,17 @@ int           tickOutCount = 6000;
 //
 void setup()
 {
-    /* Debugging
-    if (debug == TRUE)
-    {
-        Serial.begin(9600);
-    } */
-  
     // set up the digital outputs
     for (int i = 0; i < 2; i++)
     {
-        pinMode(digPin[i], OUTPUT);
-        digitalWrite(digPin[i], LOW);
+        pinMode(DIG_PINS[i], OUTPUT);
+        digitalWrite(DIG_PINS[i], LOW);
     }
-
     // set up the 8-bit DAC output pins
     for (int i = 0; i < 8; i++)
     {
-        pinMode(pinOffset+i, OUTPUT);
-        digitalWrite(pinOffset+i, LOW);
+        pinMode(PIN_OFFSET + i, OUTPUT);
+        digitalWrite(PIN_OFFSET + i, LOW);
     }
 }
 //  ==================== setup() END =======================
@@ -115,70 +102,30 @@ void setup()
 //
 void loop()
 {
-    // Get the state of the first two controls. These set the 
-    // desired types of logic for each Digital Out.
-    int aZeroType = LogicType(analogRead(0));
-    int aOneType = LogicType(analogRead(1));
-
-    // Get the values for eadh analog inputs to test
-    boolean aTwoInitState = boolState(analogRead(2));
-    boolean aThrInitState = boolState(analogRead(3));
-
-    // Get the logic state for each output based on the type
-    // and the two init values.
-    boolean dZeroState = doLogicState(aZeroType, aTwoInitState, aThrInitState);
-    boolean dOneState = doLogicState(aOneType, aTwoInitState, aThrInitState);
-    /* Debugging
-    if (tick > tickOutCount)
+    for (int i = 0; i < GATE_COUNT; i++ )
     {
-        Serial.print("A0 Input: ");
-        Serial.print(aZeroRaw);
-        Serial.print("  || Processed: ");
-        Serial.println(aZeroType);
-        Serial.print("A1 Input: ");
-        Serial.print(aOneRaw);
-        Serial.print("  || Processed: ");
-        Serial.println(aOneType);
-        Serial.print("A2 Input: ");
-        Serial.println(aTwoInitState);
-        Serial.print("A3 Input: ");
-        Serial.println(aThrInitState);
-        Serial.println("#########################");
-        Serial.print("D0 Logic Out: ");
-        Serial.println(dZeroState);
-        Serial.print("D1 Logic Out: ");
-        Serial.println(dOneState);
-        Serial.println("#########################");
-        tick = 0;
+        // Get the state of the first two controls. These set the 
+        // desired types of logic for each Digital Out.
+        logic_types[i] = getCtlIndex(logic_ctls[i], NXOR);
+        input_values[i] = analogRead(input_ctls[i]);
+        logic_states[i] = inputToBool(input_values[i]);
     }
-    tick += 1; */
-    int outState = sumStates(aTwoInitState, aThrInitState);
-    dacOutput((outState >> 2));
-    digiGateOut(0, dZeroState);
-    digiGateOut(1, dOneState);
+    for (int i = 0; i < GATE_COUNT; i++ )
+    {
+        // Get the logic state for each output based on the type
+        // and the two init values.
+        gate_states[i] = doLogicState(logic_types[i], logic_states[0], logic_states[1]);
+        digitalWrite(DIG_PINS[i], gate_states[i]);
+    }
+    int outState = constrain((input_values[0] + input_values[1]), MIN_VAL, MAX_VAL);
+    dacOutput(outState);
 }
 
 //  =================== convenience routines ===================
 
-int LogicType(int input)
+bool doLogicState(int logicType, bool boolA, bool boolB)
 {
-    int output = 0; // Default OR
-    int stageMax = STAGE_SEP;
-    while ((stageMax + 1) < input)
-    {
-        output++;
-        stageMax += STAGE_SEP;
-    }
-    if (output > 5)
-    {
-        output = 5;
-    }
-    return output;
-}
-
-boolean doLogicState(int logicType, int boolA, int boolB)
-{
-    boolean output = FALSE;
+    bool output = false;
     switch (logicType)
     {
         case OR:
@@ -203,44 +150,12 @@ boolean doLogicState(int logicType, int boolA, int boolB)
     return output;
 }
 
-int sumStates(int initValA, int initValB)
+bool inputToBool(int input)
 {
-    return constrain((initValA + initValB), MIN_VAL, MAX_VAL);
-}
-
-boolean boolState(int initVal)
-{
-    if (initVal >= HALFWAY)
+    if (input > (MAX_VAL/2))
     {
-        return TRUE;
+        return true;
     }
-    return FALSE;
-}
-
-void digiGateOut(int gate, boolean state)
-{
-    if (state == TRUE)
-    {
-        digitalWrite(digPin[gate], HIGH);
-    }
-    else
-    {
-        digitalWrite(digPin[gate], LOW);
-    }
-}
-
-//  dacOutput(long) - deal with the DAC output
-//  ------------------------------------------
-void dacOutput(long v)
-{
-    int tmpVal = v;
-    bitWrite(PORTD, 5, tmpVal & 1);
-    bitWrite(PORTD, 6, (tmpVal & 2) > 0);
-    bitWrite(PORTD, 7, (tmpVal & 4) > 0);
-    bitWrite(PORTB, 0, (tmpVal & 8) > 0);
-    bitWrite(PORTB, 1, (tmpVal & 16) > 0);
-    bitWrite(PORTB, 2, (tmpVal & 32) > 0);
-    bitWrite(PORTB, 3, (tmpVal & 64) > 0);
-    bitWrite(PORTB, 4, (tmpVal & 128) > 0);
+    return false;
 }
 
