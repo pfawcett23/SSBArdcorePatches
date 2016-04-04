@@ -30,6 +30,9 @@ visit http://creativecommons.org/licenses/
 
 #import "ssbTrigTempo.h"
 
+/*
+Constructor, takes no args.
+*/
 ssbTrigTempo::ssbTrigTempo()
 {
     _last_check_ms = millis();
@@ -38,6 +41,9 @@ ssbTrigTempo::ssbTrigTempo()
     _tempo = 0;
 }
 
+/*
+Destructor
+*/
 ssbTrigTempo::~ssbTrigTempo()
 {
     /*nothing to destruct*/

@@ -67,41 +67,40 @@ void expanderGatesOut(bool bit0,
                       bool bit6, 
                       bool bit7)
 {
-    long signal = 0;
+    long sig_total = 0;
     if (bit0 == true)
     {
-        signal += 4;
+        sig_total += 4;
     }
     if (bit1 == true)
     {
-        signal += 8;
+        sig_total += 8;
     }
     if (bit2 == true)
     {
-        signal += 16;
+        sig_total += 16;
     }
     if (bit3 == true)
     {
-        signal += 32;
+        sig_total += 32;
     }
     if (bit4 == true)
     {
-        signal += 64;
+        sig_total += 64;
     }
     if (bit5 == true)
     {
-        signal += 128;
+        sig_total += 128;
     }
     if (bit6 == true)
     {
-        signal += 256;
+        sig_total += 256;
     }
     if (bit7 == true)
     {
-        signal += 512;
+        sig_total += 512;
     }
-    PORTB = (PORTB & B11100000) | (signal >> 3);
-    PORTD = (PORTD & B00011111) | ((signal & B00000111) << 5);
+    dacOutput(sig_total);
 }
 
 /* expanderGateBang

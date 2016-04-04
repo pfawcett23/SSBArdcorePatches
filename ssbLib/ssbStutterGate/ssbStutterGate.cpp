@@ -95,11 +95,11 @@ bool ssbStutterGate::isOn()
 */
 void ssbStutterGate::updateState()
 {
-    bool tmp_on = false
+    bool tmp_on = false;
     if (_on == true)
     {
         // is gate still active..?
-        if ((_start + _druation - _ms_pad) > millis())
+        if ((_start + _duration - _ms_pad) > millis())
         {
             // if gate duration is still active 
             // (start plus dur is greater than now)

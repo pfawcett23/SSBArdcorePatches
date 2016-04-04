@@ -55,7 +55,7 @@ const int     A3_INPUT              = 3;
 const int     A4_INPUT              = 4;
 const int     A5_INPUT              = 5;
 const int     CLOCK_IN              = 2;
-const int     DIG_PINS[GATE_COUNT]  = {3,4};
+const int     DIG_PINS[GATE_COUNT]  = {3, 4};
 const int     PIN_OFFSET            = 5;
 
 // ============================================================================
@@ -111,5 +111,3 @@ int getCtlIndex(int pin, int max_index);
 int getCtlIndex(int pin, int min_index, int max_index);
 
 #endif /* _ssb_ard_base_ */
-
-

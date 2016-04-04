@@ -32,6 +32,7 @@ class ssbStutterGate
         long    _start;         // Start time for the gate. From millis(). In MS.
         int     _stutter_count; // Number of stutters. default is 1
         int     _stutter_index; // Current stutter index
+        int     _ms_pad;        // Default amount of of ms to pad between stutters.
         bool    _on;            // Is the gate currently on (HIGH).
     public:
         // Constructors

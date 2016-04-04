@@ -305,7 +305,6 @@ void ssbDebug::debugValue(int value)
     }
 }
 
-
 void ssbDebug::debugValue(long value)
 {
     if ((_debug_on == true) && (Serial.available()))
