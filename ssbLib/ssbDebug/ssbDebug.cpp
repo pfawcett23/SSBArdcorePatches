@@ -1,8 +1,8 @@
 /*
-  ssbDebug.cpp - An object to use for debugging ArdCore and Arduino 
+  ssbDebug.cpp - An object to use for debugging ArdCore and Arduino
     patches. Uses Serial Output. Manages all the complexity to allow
     for clean patch code with all debugging uck hidden away.
-    
+
   Created by Peter Fawcett, Dec 10. 2014.
     Version 0.1: Created basic ssbDebug Obect
 
@@ -25,7 +25,7 @@ visit http://creativecommons.org/licenses/
 #include "Arduino.h"
 #include "ssbDebug.h"
 
-// variables created by the build process when compiling the sketch 
+// variables created by the build process when compiling the sketch
 // used by getFreeMem call.
 extern int __bss_end;
 extern void *__brkval;
@@ -105,13 +105,13 @@ ssbDebug::~ssbDebug()
 
 void ssbDebug::enableSerial()
 {
-    Serial.begin(_baud_rate);   // Enable serial output to specified baud rate.    
+    Serial.begin(_baud_rate);   // Enable serial output to specified baud rate.
 }
 
 void ssbDebug::enableSerial(unsigned int baud_rate)
 {
     _baud_rate = baud_rate;
-    Serial.begin(_baud_rate);   // Enable serial output to specified baud rate.    
+    Serial.begin(_baud_rate);   // Enable serial output to specified baud rate.
 }
 
 bool ssbDebug::debugState()
@@ -281,7 +281,7 @@ bool ssbDebug::getFreqType()
 // function to return the amount of free RAM
 int ssbDebug::getFreeMem()
 {
-    int freeValue; 
+    int freeValue;
     if ((int)__brkval == 0)
     {
         freeValue = ((int)&freeValue) - ((int)&__bss_end);
@@ -378,8 +378,8 @@ void ssbDebug::debugValue(char* label, float value)
 
 void ssbDebug::debugCtl(int pin)
 {
-    // Base string is 17 chars long (with null). 
-    // 25 chars should be big enough for any additional pin 
+    // Base string is 17 chars long (with null).
+    // 25 chars should be big enough for any additional pin
     // index value which must be an int.
     const unsigned int BUFFER_SIZE = 25;
     char buffer[BUFFER_SIZE];
@@ -401,7 +401,7 @@ void ssbDebug::debugCtl(int pin)
 
 void ssbDebug::debugCtl(char* pinName, int pin)
 {
-    // Base string is 17 chars long (with null). 
+    // Base string is 17 chars long (with null).
     // 35 chars should be big enough for any additional pin label.
     const unsigned int BUFFER_SIZE = 35;
     char buffer[BUFFER_SIZE];
@@ -419,7 +419,7 @@ void ssbDebug::debugCtl(char* pinName, int pin)
             }
         }
     }
-}    
+}
 
 void ssbDebug::debugOutput(int outSignal, boolean d0Out, boolean d1Out)
 {

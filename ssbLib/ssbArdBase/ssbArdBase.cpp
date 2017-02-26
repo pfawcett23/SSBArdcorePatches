@@ -1,9 +1,9 @@
 /*
   ssbArdBase.cpp - Source File
-  A collection of useful / common methods for use when working with the 
-  ArdCore EuroRack module. These methods may also be of use for other Arduino 
-  based sketches, but that is less clear at this time. Assumptions about pin 
-  states and control voltages are based on the ArdCore structure.  
+  A collection of useful / common methods for use when working with the
+  ArdCore EuroRack module. These methods may also be of use for other Arduino
+  based sketches, but that is less clear at this time. Assumptions about pin
+  states and control voltages are based on the ArdCore structure.
 
   Created by Peter Fawcett, Jan 3. 2015.
     Version 0.1: Implemented / moved over from working code, the base
@@ -58,13 +58,13 @@ void dacOutput(long v)
 - Use the expander as a set of on off gates.
 Will also produce various stepped voltages on the DAC outputs.
 */
-void expanderGatesOut(bool bit0, 
-                      bool bit1, 
-                      bool bit2, 
-                      bool bit3, 
-                      bool bit4, 
-                      bool bit5, 
-                      bool bit6, 
+void expanderGatesOut(bool bit0,
+                      bool bit1,
+                      bool bit2,
+                      bool bit3,
+                      bool bit4,
+                      bool bit5,
+                      bool bit6,
                       bool bit7)
 {
     long sig_total = 0;
@@ -110,12 +110,34 @@ Will also produce various stepped voltages on the DAC outputs.
 void expanderGateBang(int gate_index)
 {
     long signal = 0;
-    if (gate_index >= 0 and gate_index < DAC_BITS)
-    {
-        signal = (4 * (gate_index + 1));
-    }
-    PORTB = (PORTB & B11100000) | (signal >> 3);
-    PORTD = (PORTD & B00011111) | ((signal & B00000111) << 5);
+	switch (gate_index)
+	{
+		case 1:
+			signal = 4;
+			break;
+		case 2:
+			signal = 8;
+			break;
+		case 3:
+			signal = 16;
+			break;
+		case 4:
+			signal = 32;
+			break;
+		case 5:
+			signal = 64;
+			break;
+		case 6:
+			signal = 128;
+			break;
+		case 7:
+			signal = 256;
+			break;
+		case 0:
+			signal = 512;
+			break;
+	}
+    dacOutput(signal);
 }
 
 // ============================================================================
@@ -123,7 +145,7 @@ void expanderGateBang(int gate_index)
 // ============================================================================
 
 /* setClockInterrupt
-- Attach an interrupt to the ArdCore clock when a clock or gate trigger is 
+- Attach an interrupt to the ArdCore clock when a clock or gate trigger is
 received it will set a flag to high. To check the clock call getClockState.
 */
 void setClockInterrupt()
@@ -161,7 +183,7 @@ bool readClockState()
 */
 void isr()
 {
-    ssb_clock_state = HIGH;
+    ssb_clock_state = true;
 }
 
 // ============================================================================
@@ -187,7 +209,8 @@ bool getCtlHighLow(int pin)
 int getCtlIndex(int pin, int max_index)
 {
     int tmp_val = 0;
-    tmp_val = map(analogRead(pin), MIN_VAL, MAX_VAL, 0, max_index+1);
+    int input_value = analogRead(pin);
+    tmp_val = map(input_value, MIN_VAL, MAX_VAL, 0, max_index+1);
     if (tmp_val > max_index)
     {
         // handle case where input == MAX_VAL and tmp_val is max_index + 1
@@ -202,7 +225,8 @@ int getCtlIndex(int pin, int max_index)
 int getCtlIndex(int pin, int min_index, int max_index)
 {
     int tmp_val = 0;
-    tmp_val = map(analogRead(pin), MIN_VAL, MAX_VAL, min_index, max_index+1);
+    int input_value = analogRead(pin);
+    tmp_val = map(input_value, MIN_VAL, MAX_VAL, min_index, max_index+1);
     if (tmp_val > max_index)
     {
         // handle case where input == MAX_VAL and tmp_val is max_index + 1

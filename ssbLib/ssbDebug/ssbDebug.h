@@ -1,8 +1,8 @@
 /*
-  ssbDebug.cpp - An object to use for debugging ArdCore and Arduino 
+  ssbDebug.cpp - An object to use for debugging ArdCore and Arduino
     patches. Uses Serial Output. Manages all the complexity to allow
     for clean patch code with all debugging uck hidden away.
-    
+
   Created by Peter Fawcett, Dec 10. 2014.
     Version 0.1: Created basic ssbDebug Obect
 
@@ -25,14 +25,14 @@ visit http://creativecommons.org/licenses/
 #ifndef _ssb_debug_class_
 #define _ssb_debug_class_
 
-#import "Arduino.h"
+#include "Arduino.h"
 
 class ssbDebug
 {
     private:
         bool            _debug_on;      // Debug On/Off
         unsigned int    _baud_rate;     // Baud rate set by constructor, currently not changeable after construction
-        bool            _ms_freq;       // 
+        bool            _ms_freq;       //
         unsigned int    _frequency;     // Number of MS between output (if ms_freq is true).
         unsigned long   _last_out;      // Start time, or last time we had output (if ms_freq is true).
         unsigned int    _tick_count;    // Number of ticks between output (if ms_freq is false).

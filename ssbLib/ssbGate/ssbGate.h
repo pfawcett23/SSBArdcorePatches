@@ -3,7 +3,7 @@
   Created by Peter Fawcett, Dec 10. 2014.
     Version 0.1: Created basic ssbGate Obect
             0.2: Jan 3. 2015
-                 Updated to render, generic constructor 
+                 Updated to render, generic constructor
                  and isOn vs isActive distinction.
 
 ============================================================
@@ -39,17 +39,17 @@ class ssbGate
         ~ssbGate();
         // Gate Methods
         //  - Check state of gate. Gate is either active or not.
-        //      Note that a gate may be active, but off 
+        //      Note that a gate may be active, but off
         //     (ie it has a delay and has not started yet).
         bool isActive();
-        // - Is the gate currently high (true if gate is active 
+        // - Is the gate currently high (true if gate is active
         //     AND has started).
         bool isOn();
-        // - Update date with a new duration (or duration and delay 
+        // - Update date with a new duration (or duration and delay
         //     time). Will retart gate if currently active.
         void updateGate(int new_dur);
         void updateGate(int new_dur, int new_delay);
-        // - Update the state of the gate. Call once per loop at either 
+        // - Update the state of the gate. Call once per loop at either
         //     start or end (end is better...).
         void updateState();
         // - Unset the gate, clear it and set it to off.

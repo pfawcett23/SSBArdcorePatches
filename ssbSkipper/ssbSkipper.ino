@@ -56,19 +56,18 @@ Description:
 
 #include <ssbArdBase.h>
 #include <ssbGate.h>
-/* // DEBUGGING
-#include <ssbDebug.h>
-*/
+// DEBUGGING
+//#include <ssbDebug.h>
 
 const int   SKIP_TYPES                      = 8;
-const int   SKIP_NONE                       = 0;
+const int   NO_SKIP                         = 0;
 const int   SKIP_2ND                        = 1;
 const int   SKIP_3RD                        = 2;
 const int   SKIP_4TH                        = 3;
 const int   SKIP_5TH                        = 4;
 const int   SKIP_6TH                        = 5;
 const int   SKIP_7TH                        = 6;
-const int   SKIP_ALL                        = 7;
+const int   ALL_SKIP                        = 7;
 
 // Ever increasing counter. Will be modded by the skip step to determine if it's a 
 // 'second step' or a 'third step' and by 8 to determine the expander 0-7 gate.
@@ -83,9 +82,8 @@ int         skip_step_rand_amt[GATE_COUNT]  = {0, 0};
 int         skip_step_index[GATE_COUNT]     = {0, 0};
 ssbGate     d_gates[GATE_COUNT]             = {ssbGate(), ssbGate()};
 
-/* //DEBUGGING:
-ssbDebug    DEBUG                           = ssbDebug();
-*/
+//DEBUGGING:
+//ssbDebug    DEBUG                           = ssbDebug();
 
 //  ==================== setup() START ======================
 //
@@ -108,10 +106,9 @@ void setup()
         digitalWrite(PIN_OFFSET + i, LOW);
     }
     setClockInterrupt();
-    /* // Debugging
-    DEBUG.enableSerial();
-    DEBUG.debugState(true);
-    */
+    // Debugging
+    //DEBUG.enableSerial();
+    //DEBUG.debugState(true);
 }
 //  ==================== setup() END =======================
 
@@ -130,25 +127,23 @@ void loop()
         step_counter++;
         for (int i = 0; i < GATE_COUNT; i++)
         {
-            skip_step_index[i] = getCtlIndex(skip_step_ctl[i], SKIP_ALL);
+            skip_step_index[i] = getCtlIndex(skip_step_ctl[i], ALL_SKIP);
             skip_step_rand_on[i] = getCtlHighLow(skip_rand_on_ctl[i]);
             skip_step_rand_amt[i] = getCtlIndex(skip_rand_amt_ctl[i], 10, 90);
             if (!doSkipStep(step_counter, skip_step_index[i], skip_step_rand_on[i], skip_step_rand_amt[i]))
             {
                 d_gates[i].setState(true);
             }
-            /* // Debugging
-            DEBUG.debugValue("Gate Index:", i);
-            DEBUG.debugValue("Skip Step Index:", skip_step_index[i]);
-            DEBUG.debugValue("Skip Step Rand On:", skip_step_rand_on[i]);
-            DEBUG.debugValue("Skip Step Rand Amt:", skip_step_rand_amt[i]);
-            DEBUG.debugValue("Gate Is On:", d_gates[i].isOn());
-            DEBUG.debugValue("Gate Is Active:", d_gates[i].isActive());
-            */
+            // Debugging
+            //DEBUG.debugValue("Gate Index:", i);
+            //DEBUG.debugValue("Skip Step Index:", skip_step_index[i]);
+            //DEBUG.debugValue("Skip Step Rand On:", skip_step_rand_on[i]);
+            //DEBUG.debugValue("Skip Step Rand Amt:", skip_step_rand_amt[i]);
+            //DEBUG.debugValue("Gate Is On:", d_gates[i].isOn());
+            //DEBUG.debugValue("Gate Is Active:", d_gates[i].isActive());
         }
-        /* // Debugging
-        DEBUG.updateTicks();
-        */
+        // Debugging
+        //DEBUG.updateTicks();
     }
     else if (digitalRead(CLOCK_IN) == false)
     {
@@ -162,6 +157,8 @@ void loop()
     {
         d_gates[i].render(DIG_PINS[i]);
     }
+    //DEBUG.debugValue("Step Counter:", step_counter);
+    //DEBUG.debugValue("Step Counter % 8:", (step_counter % 8));
     expanderGateBang((step_counter % 8));
 }
 
@@ -169,9 +166,9 @@ bool doSkipStep(int current_step, int skip_step_i, bool rand_enabled, int rand_a
 {
     bool do_skip = false;
     int step_mod = 0;
-    if (skip_step_i > SKIP_NONE)
+    if (skip_step_i > NO_SKIP)
     {
-        if (skip_step_i == SKIP_ALL)
+        if (skip_step_i == ALL_SKIP)
         {
             do_skip = true;
             if ((rand_enabled == true) and (random(0, 100) < rand_amt))
