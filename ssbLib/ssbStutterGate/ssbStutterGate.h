@@ -22,7 +22,7 @@ visit http://creativecommons.org/licenses/
 #ifndef _ssb_stutter_gate_class_
 #define _ssb_stutter_gate_class_
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 
 class ssbStutterGate

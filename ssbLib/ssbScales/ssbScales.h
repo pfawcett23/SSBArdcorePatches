@@ -24,7 +24,7 @@ visit http://creativecommons.org/licenses/
 #ifndef _ssb_scales_
 #define _ssb_scales_
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 // ============================================================================
 // Quantized Voltage Map:

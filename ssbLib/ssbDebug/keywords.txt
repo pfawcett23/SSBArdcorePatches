@@ -1,19 +1,30 @@
 ###############################################################################
+# Syntax Coloring Map For ssbGate
+###############################################################################
+
+###############################################################################
+# Datatypes (KEYWORD1)
+###############################################################################
+
+ssbDebug  		KEYWORD1
+
+###############################################################################
 # Methods and Functions (KEWORD2)
 ###############################################################################
 
-enableSerial    KEYWORD2
-debugState      KEYWORD2
-debugCtl        KEYWORD2
-getFreeMem      KEYWORD2
-resetTickCount  KEYWORD2
-setMaxTicks     KEYWORD2
-updateTicks     KEYWORD2
-debugValue      KEYWORD2
-getTickCount    KEYWORD2
-getMaxTicks     KEYWORD2
+enableSerial		KEYWORD2
+debugState			KEYWORD2
+resetFreqState		KEYWORD2
+setFrequency		KEYWORD2
+updateTicks			KEYWORD2
+getFreqValue		KEYWORD2
+getCurrentIndex		KEYWORD2
+getFreqType			KEYWORD2
+getFreeMem			KEYWORD2
+debugValue			KEYWORD2
+debugCtl			KEYWORD2
+debugOutput			KEYWORD2
 
 ###############################################################################
 # Constants (LITERAL1)
 ###############################################################################
-

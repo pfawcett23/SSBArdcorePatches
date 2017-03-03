@@ -22,7 +22,6 @@ For more information on the Creative Commons CC BY-NC license,
 visit http://creativecommons.org/licenses/
 */
 
-#include "Arduino.h"
 #include "ssbDebug.h"
 
 // variables created by the build process when compiling the sketch

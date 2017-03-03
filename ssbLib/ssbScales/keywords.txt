@@ -1,5 +1,5 @@
 ###############################################################################
-# Syntax Coloring Map For ssbArdBase
+# Syntax Coloring Map For ssbScales
 ###############################################################################
 
 ###############################################################################
@@ -10,31 +10,37 @@
 # Methods and Functions (KEWORD2)
 ###############################################################################
 
-dacOutput 			KEYWORD2
-expanderGatesOut 	KEYWORD2
-expanderGateBang 	KEYWORD2
-setClockInterrupt 	KEYWORD2
-peekClockState 		KEYWORD2
-readClockState 		KEYWORD2
-isr 				KEYWORD2
-getCtlHighLow 		KEYWORD2
-getCtlIndex 		KEYWORD2
-
 ###############################################################################
 # Constants (LITERAL1)
 ###############################################################################
 
-MAX_VAL				LITERAL1
-MIN_VAL				LITERAL1
-DAC_BITS			LITERAL1
-GATE_COUNT			LITERAL1
-A0_INPUT			LITERAL1
-A1_INPUT		 	LITERAL1
-A2_INPUT			LITERAL1
-A3_INPUT			LITERAL1
-A4_INPUT			LITERAL1
-A5_INPUT			LITERAL1
-CLOCK_IN			LITERAL1
-DIG_PINS			LITERAL1
-PIN_OFFSET			LITERAL1
-NOTE_COUNT			LITERAL1
+NOTE_COUNT				LITERAL1
+QNOTES					LITERAL1
+C_NOTE					LITERAL1
+C_SHARP_NOTE			LITERAL1
+D_NOTE					LITERAL1
+D_SHARP_NOTE			LITERAL1
+E_NOTE					LITERAL1
+F_NOTE					LITERAL1
+F_SHARP_NOTE			LITERAL1
+G_NOTE					LITERAL1
+G_SHARP_NOTE			LITERAL1
+A_NOTE					LITERAL1
+A_SHARP_NOTE			LITERAL1
+B_NOTE					LITERAL1
+OCT_3					LITERAL1
+OCT_4					LITERAL1
+OCT_5					LITERAL1
+OCT_6					LITERAL1
+OCT_7					LITERAL1
+MAJOR_SCALE_LEN			LITERAL1
+MAJOR_SCALE				LITERAL1
+MINOR_SCALE_LEN			LITERAL1
+MINOR_SCALE				LITERAL1
+PENTA_MAJOR_SCALE_LEN	LITERAL1
+PENTA_MAJOR_SCALE		LITERAL1
+PENTA_MINOR_SCALE_LEN	LITERAL1
+PENTA_MINOR_SCALE		LITERAL1
+
+#endif /* _ssb_scales_ */
+

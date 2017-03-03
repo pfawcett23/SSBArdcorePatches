@@ -34,7 +34,7 @@ visit http://creativecommons.org/licenses/
 #ifndef _ssb_ard_base_
 #define _ssb_ard_base_
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 // ============================================================================
 // ArdCore General Constants:

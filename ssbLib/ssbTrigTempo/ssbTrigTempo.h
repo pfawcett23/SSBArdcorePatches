@@ -28,8 +28,11 @@ For more information on the Creative Commons CC BY-NC license,
 visit http://creativecommons.org/licenses/
 */
 
+
 #ifndef _ssb_trig_tempo_class_
 #define _ssb_trig_tempo_class_
+
+#include <Arduino.h>
 
 class ssbTrigTempo
 {

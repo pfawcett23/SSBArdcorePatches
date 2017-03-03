@@ -25,7 +25,7 @@ visit http://creativecommons.org/licenses/
 #ifndef _ssb_debug_class_
 #define _ssb_debug_class_
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 class ssbDebug
 {

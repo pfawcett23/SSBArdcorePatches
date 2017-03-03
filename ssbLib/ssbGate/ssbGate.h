@@ -25,7 +25,7 @@ visit http://creativecommons.org/licenses/
 #ifndef _ssb_ssb_gate_class_
 #define _ssb_ssb_gate_class_
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 
 class ssbGate
@@ -46,7 +46,7 @@ class ssbGate
         //     AND has started).
         bool isOn();
         // - Update date with a new duration (or duration and delay
-        //     time). Will retart gate if currently active.
+        //     time). Will restart gate if currently active.
         void updateGate(int new_dur);
         void updateGate(int new_dur, int new_delay);
         // - Update the state of the gate. Call once per loop at either
