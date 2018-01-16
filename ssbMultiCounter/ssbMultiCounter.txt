@@ -1,0 +1,98 @@
+ArdCore Usage:
+===============================================================================
+
+Loading / Reset Button:
+    A0 - Clock Patch:
+        0 - ssbSkipper: Skip every nth step.
+        1 - ssbPrimer:  Skip every step but nth prime.
+        2 - ssbPatter:  Clock on/off depending on step pattern.
+        3 - <TBD>:      In Dev.
+    A1 - Gate Patch:
+        0 - ssbSeqSwitch: Advance bit output on each clock step.
+        1 - ssbByteCount: Count out bytes (0, 1, 10, 11, 100, ...)
+        2 - ssbPatCycle:  Cycle though a number of patterns in the bits.
+        3 - ssbPulseDiv:  Every gate, every second gate, every third gate, etc.
+
+-------------------------------------------------------------------------------
+
+Full Controls:
+    ssbSkipper:
+        I/O Usage:
+            Knob A0:         Enable random for D0
+            Knob A1:         Enable random for D1
+            Knob/Jack A2:    Skip beat (None, 2nd, 3rd, 4th, 5th, 6th, 7th, All) for D0
+            Knob/Jack A3:    Skip beat (None, 2nd, 3rd, 4th, 5th, 6th, 7th, All) for D1
+            Digital Out 1:   Gate / Clock out 1
+            Digital Out 2:   Gate / Clock out 2
+            Clock In:        Gate / Clock In
+            Analog Out:      Stepped Voltage
+        Input Expander:
+            Knob A4/Jack A4: Shift randomness weight 10%-90% for D0
+            Knob A5/Jack A5: Shift randomness weight 10%-90% for D1
+
+    ssbPrimer:
+        I/O Usage:
+            Knob A0:         Count for D0: 3, 5, 7, 11, 13, 17, 19, 23.
+            Knob A1:         Count for D1: 3, 5, 7, 11, 13, 17, 19, 23.
+            Knob/Jack A2:    Invert (skip all but primes / skip all primes only)
+            Knob/Jack A3:    Invert (skip all but primes / skip all primes only)
+            Digital Out 1:   Gate / Counter Output 1
+            Digital Out 2:   Gate / Counter Output 2
+            Clock In:        Gate / Clock In
+            Analog Out:      Stepped Voltage
+        Input Expander:
+            Knob A4/Jack A4: Unused
+            Knob A5/Jack A5: Unused
+
+    ssbPatter:
+        Patterns:
+            1: x . x . x . x .
+            2: . x . x . x . x
+            3: x . . . x . . .
+            4: x x . . x x . .
+            5: x x x . x x x .
+            6: . . x . . . x .
+            7: . . . x . . . x
+            8: . . x x . . x x
+
+        I/O Usage:
+            Knob A0:         Pattern to use for D0 out.
+            Knob A1:         Pattern to use for D1 out.
+            Knob/Jack A2:    Length of D0 Pattern. 4 - 16.
+            Knob/Jack A3:    Length of D1 Pattern. 4 - 16.
+            Digital Out 1:   Gate Output 1
+            Digital Out 2:   Gate Output 2
+            Clock In:        Gate / Clock In
+            Analog Out:      Stepped Voltage
+        Input Expander:
+            Knob A4/Jack A4: Direction (Backward < 40% Forward < 80% Pendulum)
+            Knob A5/Jack A5: Direction (Backward < 40% Forward < 80% Pendulum)
+
+-------------------------------------------------------------------------------
+
+Byte Patches (no external control):
+    ssbSeqSwitch
+        Each gate advances the pulse on to the next Bit Output.
+        The Analog output is stepped accordingly.
+
+    ssbByteCount
+        Count bytes (0, 1, 10, 11, 100, 101, 110, 111...) on the Bit Output.
+        The Analog output is stepped accordingly.
+    
+    ssbPatCycle
+        Cycle through a sequence of 8 patterns on the Bit Output.
+        The Analog output is stepped accordingly.
+        Patterns:
+          1: x . x . x . x .
+          2: . x . x . x . x
+          3: x . . . x . . .
+          4: x x . . x x . .
+          5: x x x . x x x .
+          6: . . x . . . x .
+          7: . . . x . . . x
+          8: . . x x . . x x
+
+    ssbPulseDiv:
+
+        Bit 1 is every gate, Bit 2 is every other gate, gate 3 is every
+        third gate and so on.Analog output is stepped accordingly

@@ -7,12 +7,10 @@
  *
  * Note values may be one of the following:
  *    0  : Play the root note.
- *    #  : Play 1 to 12 notes above the root note (if 
- *         the specified note is higher than the allowed
- *         voltage, it will be dropped an octave.
- *    -# : Play 1 to 12 notes below the root note (if
- *         the specified note is lower than the allowed
- *         voltage, it will be raised an octave.
+ *    #  : Play 1 to 12 notes above the root note (if the specified note is
+ *         higher than the allowed voltage, it will be dropped an octave.
+ *    -# : Play 1 to 12 notes below the root note (if the specified note is
+ *         lower than the allowed voltage, it will be raised an octave.
  *    512; A magic number to represent a rest.
  *    So a sequence could be something like:
  *    {0, 7, 7, 512, -4, 512, 5...}
@@ -29,7 +27,7 @@
  * variable sequences using the expander.
  *
  * The expander will allow this to be tweaked in two ways.
- *     When set to > 512 (via CV) the gate will be expanded. 
+ *     When set to > 512 (via CV) the gate will be expanded.
  *         It will multiplied by *2, *4 and *8.
  *     When set to < 512 (via CV) the gate will be stuttered.
  *         It will be divided by /2, /4, and /8.
